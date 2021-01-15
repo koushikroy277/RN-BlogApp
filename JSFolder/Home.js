@@ -11,6 +11,7 @@ import {
 
 import { createStackNavigator } from "@react-navigation/stack";
 import Land from './Land';
+import Within from './Within';
 
 const Stack = createStackNavigator();
 
@@ -29,9 +30,10 @@ export default function Home() {
           headerTintColor: '#0d335d',
           headerTitleStyle: {
             fontWeight: 'bold',
-            fontSize: 25,
+            fontSize: 22,
           },
         }} />
+        <Stack.Screen name="Within" component={Within}/>
       </Stack.Navigator>
   );
 }
