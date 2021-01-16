@@ -21,9 +21,11 @@ import {
   slideImg5,
 } from "./ImgRender";
 
-export default function Land() {
-  const SLIDER_WIDTH = Dimensions.get("window").width + 80;
-  const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.62);
+import Story from "./Story";
+
+export default function Land({ navigation }) {
+  const SLIDER_WIDTH = Dimensions.get("window").width + 130;
+  const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.53);
 
   const isCarousel = useRef(null);
   const [index, setIndex] = useState(0);
@@ -31,33 +33,33 @@ export default function Land() {
     {
       text: "Trip to Switzerland",
       image: slideImg,
-      url: 'Within',
+      url: "Within",
     },
     {
       text: "Trip to Switzerland",
       image: slideImg2,
-      url: 'Within',
+      url: "Within",
     },
     {
       text: "Trip to Switzerland",
       image: slideImg3,
-      url: 'Within',
+      url: "Within",
     },
     {
       text: "Trip to Switzerland",
       image: slideImg4,
-      url: 'Within',
+      url: "Within",
     },
     {
       text: "Trip to Switzerland",
       image: slideImg5,
-      url: 'Within',
+      url: "Within",
     },
   ]);
 
   function pagination() {
     return (
-      <View style={{ position: 'relative', top: -150 }}>
+      <View>
         <Pagination
           dotsLength={items.length}
           activeDotIndex={index}
@@ -74,35 +76,45 @@ export default function Land() {
     );
   }
 
-  return (
-    <View style={styles.container}>
-      <Carousel
-        layout={"default"}
-        data={items}
-        sliderWidth={SLIDER_WIDTH}
-        itemWidth={ITEM_WIDTH}
-        renderItem={ImgCarousel}
-        ref={isCarousel}
-        useScrollView={true}
-        onSnapToItem={(index) => setIndex(index)}
-      />
-      {pagination()}
-    </View>
-  );
-}
-
-function ImgCarousel({ item, index, navigation }) {
-  return (
-    <View style={styles.slider}>
-      <Image style={styles.image} source={item.image} />
-      <Text style={styles.slideText}>{item.text}</Text>
-      <View style={styles.slideBtn}>
-        <Button
-        color= '#1a508b'
-        title="Learn more"
-        onPress={() => navigation.push("Within")}/>
+  function ImgCarousel({ item, index }) {
+    return (
+      <View style={styles.slider}>
+        <Image style={styles.image} source={item.image} />
+        <Text style={styles.slideText}>{item.text}</Text>
+        <View style={styles.slideBtn}>
+          <Button
+            color="#1a508b"
+            title="Learn more"
+            onPress={() => navigation.navigate(item.url)}
+          />
+        </View>
       </View>
-    </View>
+    );
+  }
+
+  return (
+    <ScrollView>
+      <View style={styles.container}>
+        <View>
+          <Text style={styles.head}>Recommended</Text>
+        </View>
+        <Carousel
+          layout={"default"}
+          data={items}
+          sliderWidth={SLIDER_WIDTH}
+          itemWidth={ITEM_WIDTH}
+          renderItem={ImgCarousel}
+          ref={isCarousel}
+          useScrollView={true}
+          onSnapToItem={(index) => setIndex(index)}
+        />
+        {pagination()}
+        <View>
+          <Text style={styles.head2}>Trips & Tour</Text>
+        </View>
+        <Story />
+      </View>
+    </ScrollView>
   );
 }
 
@@ -112,18 +124,28 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  slideBtn:{
-    position: 'absolute',
-    top: 250,
+  head: {
+    fontSize: 35,
+    fontWeight: "700",
+    marginLeft: -60,
+    marginVertical: 15,
+  },
+  head2: {
+    fontSize: 35,
+    fontWeight: "700",
+    marginLeft: -130,
+    paddingBottom: 30,
+  },
+  slideBtn: {
+    position: "absolute",
+    top: 260,
     bottom: 0,
-    left: 10,
+    left: 25,
   },
   slider: {
     borderRadius: 5,
-    height: "100%",
+    height: 350,
     paddingHorizontal: 50,
-    marginVertical: 10,
-    position: 'relative'
   },
   imageContainer: {
     backgroundColor: "white",
@@ -131,22 +153,16 @@ const styles = StyleSheet.create({
   },
   image: {
     ...StyleSheet.absoluteFillObject,
-    width: 270,
+    width: 250,
     height: 320,
     borderRadius: 15,
   },
   slideText: {
-    color: '#fff',
-    paddingTop: '80%',
-    paddingHorizontal: 10,
-    backgroundColor: 'rgba(0, 0, 0, .3)',
-    borderRadius: 15,
-    fontSize: 20,
-    fontWeight: '900',
-    position: 'absolute',
-    top: 0,
-    bottom: 165,
-    left: 0,
-    right: 4,
-  }
+    color: "#fff",
+    paddingTop: "80%",
+    fontSize: 19,
+    fontWeight: "700",
+    marginTop: 80,
+    marginLeft: -20,
+  },
 });
