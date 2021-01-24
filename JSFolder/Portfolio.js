@@ -8,9 +8,16 @@ import {
   Image,
 } from "react-native";
 
-import { person2 } from "./ImgRender";
+import {
+  Feather,
+  MaterialCommunityIcons,
+  AntDesign,
+  Ionicons,
+} from "@expo/vector-icons";
 
-import { Feather } from '@expo/vector-icons';
+import { person2 } from "./ImgRender";
+import Work from "./Work";
+import Education from "./Education";
 
 export default function Portfolio() {
   return (
@@ -32,19 +39,66 @@ export default function Portfolio() {
             and collaboration.
           </Text>
         </View>
+        <View>
+          <PortTab />
+        </View>
         <Text style={styles.portTitle}>My Skills</Text>
         <View>
           <View style={styles.portSkill}>
-               <View style={{marginHorizontal: 20, marginTop: 20}}>
-                    <Feather 
-                    name="monitor" 
-                    size={60} 
-                    color="black" />
-               </View>
-               <View>
-                    <Text style={{fontSize: 27, fontWeight: '700', marginBottom: 20,}}>Web Development</Text>
-                    <Text>I mainly design the UI of the website. With lots of design components & tools, It's my eternal duty to decorate the site with utmost beauty</Text>
-               </View>
+            <View style={styles.portIcon}>
+              <Feather name="monitor" size={60} color="#931a25" />
+            </View>
+            <View>
+              <Text style={styles.portSkillHead}>Web Development</Text>
+              <Text style={styles.portSkillDes}>
+                I mainly design the UI of the website. With lots of design
+                components & tools, It's my eternal duty to decorate the site
+                with utmost beauty
+              </Text>
+            </View>
+          </View>
+          <View style={styles.portSkill}>
+            <View style={styles.portIcon}>
+              <MaterialCommunityIcons
+                name="content-duplicate"
+                size={60}
+                color="#931a25"
+              />
+            </View>
+            <View>
+              <Text style={styles.portSkillHead}>Web Development</Text>
+              <Text style={styles.portSkillDes}>
+                I mainly design the UI of the website. With lots of design
+                components & tools, It's my eternal duty to decorate the site
+                with utmost beauty
+              </Text>
+            </View>
+          </View>
+          <View style={styles.portSkill}>
+            <View style={styles.portIcon}>
+              <AntDesign name="windows" size={60} color="#931a25" />
+            </View>
+            <View>
+              <Text style={styles.portSkillHead}>Web Development</Text>
+              <Text style={styles.portSkillDes}>
+                I mainly design the UI of the website. With lots of design
+                components & tools, It's my eternal duty to decorate the site
+                with utmost beauty
+              </Text>
+            </View>
+          </View>
+          <View style={styles.portSkill}>
+            <View style={styles.portIcon}>
+              <AntDesign name="adduser" size={60} color="#931a25" />
+            </View>
+            <View>
+              <Text style={styles.portSkillHead}>Web Development</Text>
+              <Text style={styles.portSkillDes}>
+                I mainly design the UI of the website. With lots of design
+                components & tools, It's my eternal duty to decorate the site
+                with utmost beauty
+              </Text>
+            </View>
           </View>
         </View>
       </View>
@@ -52,29 +106,3 @@ export default function Portfolio() {
   );
 }
 
-const styles = StyleSheet.create({
-  portTitle: {
-    fontSize: 40,
-    fontFamily: "sans-serif-condensed",
-    fontWeight: "700",
-    marginVertical: 30,
-    marginLeft: 20,
-    color: "#732716",
-  },
-  profileImg: {
-    width: "100%",
-    height: "100%",
-    borderRadius: 10,
-  },
-  profileDes: {
-    fontSize: 18,
-    marginHorizontal: 10,
-    marginVertical: 10,
-    lineHeight: 35,
-    opacity: 0.6,
-  },
-  portSkill: {
-       flexDirection: "row",
-       marginRight: 30,
-  }
-});

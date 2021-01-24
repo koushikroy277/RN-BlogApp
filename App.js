@@ -14,8 +14,12 @@ import {
   Modal,
 } from "react-native";
 
-import  AppLoading  from 'expo-app-loading';
-import * as Font from 'expo-font';
+import AppLoading from "expo-app-loading";
+import { useFonts, BeVietnam_700Bold } from "@expo-google-fonts/be-vietnam";
+import { Livvic_700Bold } from "@expo-google-fonts/livvic";
+import { Alata_400Regular } from '@expo-google-fonts/alata';
+import { Gelasio_600SemiBold_Italic, } from '@expo-google-fonts/gelasio';
+
 import { Ionicons } from "@expo/vector-icons";
 
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
@@ -28,50 +32,52 @@ import Service from "./JSFolder/Service";
 
 const Tab = createMaterialBottomTabNavigator();
 
-const getFonts = () =>
-  Font.loadAsync({
-    "cinzel-variable": require("./assets/fonts/Cinzel-VariableFont_wght.ttf"),
-    "fraunces": require("./assets/fonts/Fraunces-Italic-VariableFont_SOFT,WONK,opsz,wght.ttf"),
+export default function App() {
+  let [fontsloaded] = useFonts({
+    BeVietnam_700Bold,
+    Livvic_700Bold,
+    Alata_400Regular,
+    Gelasio_600SemiBold_Italic,
   });
 
-export default function App() {
-  const [fontsLoaded, setFontsLoaded] = useState(false);
+  if (!fontsloaded) {
+    return <AppLoading />;
+  } else {
+    return (
+      <NavigationContainer style={styles.container}>
+        <Tab.Navigator
+          initialRouteName="Home"
+          barStyle={{ backgroundColor: "#732716" }}
+          screenOptions={({ route }) => ({
+            tabBarIcon: ({ focused, color }) => {
+              let iconName;
 
-  return(
-    <NavigationContainer style={styles.container}>
-      <Tab.Navigator
-        initialRouteName="Home"
-        barStyle={{ backgroundColor: "#732716" }}
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color }) => {
-            let iconName;
+              if (route.name === "Home") {
+                iconName = focused ? "home" : "home";
+              } else if (route.name === "Detail") {
+                iconName = focused ? "person" : "person";
+              } else if (route.name === "Contact") {
+                iconName = focused ? "call" : "call";
+              } else if (route.name === "Service") {
+                iconName = focused ? "settings" : "settings";
+              }
 
-            if (route.name === "Home") {
-              iconName = focused ? "home" : "home";
-            } else if (route.name === "Detail") {
-              iconName = focused ? "person" : "person";
-            } else if (route.name === "Contact") {
-              iconName = focused ? "call" : "call";
-            } else if (route.name === "Service") {
-              iconName = focused ? "settings" : "settings";
-            }
-
-            return <Ionicons name={iconName} size={20} color={color} />;
-          },
-        })}
-        tabBarOptions={{
-          activeTintColor: "deepskyblue",
-          inactiveTintColor: "gray",
-        }}
-      >
-        <Tab.Screen name="Home" component={Home} />
-        <Tab.Screen name="Detail" component={Detail} />
-        <Tab.Screen name="Contact" component={Contact} />
-        <Tab.Screen name="Service" component={Service} />
-      </Tab.Navigator>
-    </NavigationContainer>
+              return <Ionicons name={iconName} size={20} color={color} />;
+            },
+          })}
+          tabBarOptions={{
+            activeTintColor: "deepskyblue",
+            inactiveTintColor: "gray",
+          }}
+        >
+          <Tab.Screen name="Home" component={Home} />
+          <Tab.Screen name="Detail" component={Detail} />
+          <Tab.Screen name="Contact" component={Contact} />
+          <Tab.Screen name="Service" component={Service} />
+        </Tab.Navigator>
+      </NavigationContainer>
     );
-
+  }
 }
 
 const styles = StyleSheet.create({

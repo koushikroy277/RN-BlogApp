@@ -10,7 +10,7 @@ import {
 
 import { person } from "./ImgRender";
 
-import Portfolio from './Portfolio';
+import Portfolio from "./Portfolio";
 
 export default function Detail() {
   return (
@@ -19,12 +19,10 @@ export default function Detail() {
         <View style={styles.portBg}>
           <Image style={styles.portImg} source={person} />
           <View style={styles.portTitleBg}>
-            <Text
-              style={{ fontSize: 50, fontWeight: "700", fontFamily: "serif" }}
-            >
-              Richard Graverry
+            <Text style={styles.detailBan}>Richard Graverry</Text>
+            <Text style={{ fontSize: 20 }}>
+              Designer, Content Manager & Developer
             </Text>
-            <Text style={{fontSize: 20, }}>Designer, Content Manager & Developer</Text>
           </View>
         </View>
         <View>
@@ -38,6 +36,10 @@ export default function Detail() {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#F2DCC9",
+  },
+  detailBan: { 
+    fontSize: 60,  
+    fontFamily: "Gelasio_600SemiBold_Italic" 
   },
   portBg: {
     height: 600,
