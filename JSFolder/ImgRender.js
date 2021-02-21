@@ -28,5 +28,14 @@ export const person6 = require('../assets/person6.jpg');
 export const person7 = require('../assets/person7.jpg');
 export const person8 = require('../assets/person8.jpg');
 
+export const travel = require('../assets/page2pic.jpg');
+export const travel2 = require('../assets/page2pic2.jpg');
+export const travel3 = require('../assets/page2pic3.jpg');
+export const travel4 = require('../assets/page2pic4.jpg');
+export const travel5 = require('../assets/page2pic8.jpg');
+export const travel6 = require('../assets/page2pic9.jpg');
+export const travel7 = require('../assets/page2pic10.jpg');
+export const travel8 = require('../assets/page2pic11.jpg');
+
 export const appModel = require('../assets/modelwebsite.jpg');
 

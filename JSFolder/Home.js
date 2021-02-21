@@ -10,13 +10,11 @@ import {
   StyleSheet,
 } from "react-native";
 
+import * as RootNavigation from "./RootNavigation";
+
 import { createStackNavigator } from "@react-navigation/stack";
-import {
-  createDrawerNavigator,
-  DrawerContentScrollView,
-  DrawerItemList,
-  DrawerItem,
-} from "@react-navigation/drawer";
+
+import { Ionicons } from "@expo/vector-icons";
 
 import Land from "./Land";
 import Within from "./Within";
@@ -31,180 +29,102 @@ import EachStory6 from "./EachStory6";
 import EachStory7 from "./EachStory7";
 
 const Stack = createStackNavigator();
-const Drawer = createDrawerNavigator();
 
-export default function Home({ navigation }) {
-  function Head(){
-    return
-  }
-
+function Head() {
   return (
     <>
-      <Stack.Navigator initialRouteName="LandWithin">
-        <Stack.Screen
-          name="LandWithin"
-          component={LandWithin}
-          options={({ navigation, route }) => ({
-            title: () =><Head/>,
-            headerStyle: {
-              backgroundColor: "none",
-              height: 0,
-            },
-            headerTitleContainerStyle: { marginLeft: "75%" },
-            headerTintColor: "#0d335d",
-            headerTitleStyle: {
-              fontWeight: "bold",
-              fontSize: 22,
-            },
-          })}
-        />
-
-        <Stack.Screen
-          name="EachStory"
-          component={EachStory}
-          options={({ navigation, route }) => ({
-            title: "Story",
-            headerStyle: {
-              backgroundColor: "#fff",
-            },
-            headerTitleAlign: "center",
-            headerTintColor: "#03265c",
-            headerTitleStyle: {
-              fontWeight: "bold",
-              fontSize: 22,
-            },
-          })}
-        />
-        <Stack.Screen
-          name="EachStory2"
-          component={EachStory2}
-          options={({ navigation, route }) => ({
-            title: "Story",
-            headerStyle: {
-              backgroundColor: "#fff",
-            },
-            headerTitleAlign: "center",
-            headerTintColor: "#03265c",
-            headerTitleStyle: {
-              fontWeight: "bold",
-              fontSize: 22,
-            },
-          })}
-        />
-        <Stack.Screen
-          name="EachStory3"
-          component={EachStory3}
-          options={({ navigation, route }) => ({
-            title: "Story",
-            headerStyle: {
-              backgroundColor: "#fff",
-            },
-            headerTitleAlign: "center",
-            headerTintColor: "#03265c",
-            headerTitleStyle: {
-              fontWeight: "bold",
-              fontSize: 22,
-            },
-          })}
-        />
-        <Stack.Screen
-          name="EachStory4"
-          component={EachStory4}
-          options={({ navigation, route }) => ({
-            title: "Story",
-            headerStyle: {
-              backgroundColor: "#fff",
-            },
-            headerTitleAlign: "center",
-            headerTintColor: "#03265c",
-            headerTitleStyle: {
-              fontWeight: "bold",
-              fontSize: 22,
-            },
-          })}
-        />
-        <Stack.Screen
-          name="EachStory5"
-          component={EachStory5}
-          options={({ navigation, route }) => ({
-            title: "Story",
-            headerStyle: {
-              backgroundColor: "#fff",
-            },
-            headerTitleAlign: "center",
-            headerTintColor: "#03265c",
-            headerTitleStyle: {
-              fontWeight: "bold",
-              fontSize: 22,
-            },
-          })}
-        />
-        <Stack.Screen
-          name="EachStory6"
-          component={EachStory6}
-          options={({ navigation, route }) => ({
-            title: "Story",
-            headerStyle: {
-              backgroundColor: "#fff",
-            },
-            headerTitleAlign: "center",
-            headerTintColor: "#03265c",
-            headerTitleStyle: {
-              fontWeight: "bold",
-              fontSize: 22,
-            },
-          })}
-        />
-        <Stack.Screen
-          name="EachStory7"
-          component={EachStory7}
-          options={({ navigation, route }) => ({
-            title: "Story",
-            headerStyle: {
-              backgroundColor: "#fff",
-            },
-            headerTitleAlign: "center",
-            headerTintColor: "#03265c",
-            headerTitleStyle: {
-              fontWeight: "bold",
-              fontSize: 22,
-            },
-          })}
-        />
-
-        <Stack.Screen name="Within" component={Within} />
-      </Stack.Navigator>
+      <View style={{ marginHorizontal: 20, }}>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+          }}
+        >
+          <Text style={homeStyle}>Home</Text>
+        </View>
+      </View>
     </>
   );
 }
 
-function CustomDrawerContent(props) {
-  return (
-    <DrawerContentScrollView {...props} style={{marginTop: 40}}>
-      <DrawerItemList {...props} />
-      <DrawerItem
-        label="Close drawer"
-        onPress={() => props.navigation.closeDrawer()}
-      />
-      <DrawerItem
-        label="Toggle drawer"
-        onPress={() => props.navigation.toggleDrawer()}
-      />
-    </DrawerContentScrollView>
-  );
-}
+const tabHeader = ({ navigation, route }) => ({
+  headerTitle: () => <Head />,
+  headerStyle: {
+    backgroundColor: "#380202",
+    height: 70,
+  },
+  headerTitleContainerStyle: { marginLeft: 0 },
+  headerTintColor: "#fff",
+  headerTitleStyle: {
+    fontWeight: "bold",
+    fontSize: 22,
+  },
+});
 
-function LandWithin(props) {
+const pageHeader = ({ navigation, route }) => ({
+  headerStyle: {
+    backgroundColor: "#380202",
+    height: 70,
+  },
+  headerTitleContainerStyle: { marginLeft: 0 },
+  headerTintColor: "#fff",
+  headerTitleStyle: {
+    fontWeight: "bold",
+    fontSize: 22,
+  },
+});
+
+const homeStyle = {
+  color: "#fff",
+  fontSize: 25,
+};
+
+export default function Home({ navigation }) {
+
   return (
     <>
-      <Drawer.Navigator
-        initialRouteName="Land"
-        drawerContent={(props) => <CustomDrawerContent {...props} />}
-      >
-        <Drawer.Screen name="Land" component={Land} />
-        <Drawer.Screen name="Feed" component={Feed} />
-        <Drawer.Screen name="Notification" component={Notification} />
-      </Drawer.Navigator>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={Land} options={tabHeader} />
+
+        <Stack.Screen
+          name="EachStory"
+          component={EachStory}
+          options={pageHeader}
+        />
+        <Stack.Screen
+          name="EachStory2"
+          component={EachStory2}
+          options={pageHeader}
+        />
+        <Stack.Screen
+          name="EachStory3"
+          component={EachStory3}
+          options={pageHeader}
+        />
+        <Stack.Screen
+          name="EachStory4"
+          component={EachStory4}
+          options={pageHeader}
+        />
+        <Stack.Screen
+          name="EachStory5"
+          component={EachStory5}
+          options={pageHeader}
+        />
+        <Stack.Screen
+          name="EachStory6"
+          component={EachStory6}
+          options={pageHeader}
+        />
+        <Stack.Screen
+          name="EachStory7"
+          component={EachStory7}
+          options={pageHeader}
+        />
+
+        <Stack.Screen name="Within" component={Within} />
+      </Stack.Navigator>
     </>
   );
 }

@@ -15,6 +15,8 @@ import {
 } from "react-native";
 
 import AppLoading from "expo-app-loading";
+import { Constants } from 'expo';
+
 import { useFonts, BeVietnam_700Bold } from "@expo-google-fonts/be-vietnam";
 import { Livvic_700Bold } from "@expo-google-fonts/livvic";
 import { Alata_400Regular } from '@expo-google-fonts/alata';
@@ -29,6 +31,9 @@ import Home from "./JSFolder/Home";
 import Detail from "./JSFolder/Detail";
 import Contact from "./JSFolder/Contact";
 import Service from "./JSFolder/Service";
+import Footer from "./JSFolder/Footer";
+
+import { navigationRef } from './JSFolder/RootNavigation';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -44,10 +49,11 @@ export default function App() {
     return <AppLoading />;
   } else {
     return (
-      <NavigationContainer style={styles.container}>
+      <>
+      <NavigationContainer style={styles.container} ref={navigationRef} >
         <Tab.Navigator
           initialRouteName="Home"
-          barStyle={{ backgroundColor: "#732716" }}
+          barStyle={{ backgroundColor: "#380202" }}
           screenOptions={({ route }) => ({
             tabBarIcon: ({ focused, color }) => {
               let iconName;
@@ -76,6 +82,7 @@ export default function App() {
           <Tab.Screen name="Service" component={Service} />
         </Tab.Navigator>
       </NavigationContainer>
+      </>
     );
   }
 }
@@ -85,7 +92,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 30,
+    
   },
   tab: {
     paddingBottom: 20,
